@@ -30,7 +30,7 @@ run_on_nodes()
 {
     local nodes="$(echo "$1" | sed "s/,/ /g")"
     shift
-    parallel-ssh -i -H "$nodes" "$@" || { echo "Error running bootstrap.sh"; exit 1; }
+    parallel-ssh -t 300 -i -H "$nodes" "$@" || { echo "Error running bootstrap.sh"; exit 1; }
 }
 
 echo "Installing kubernetes on all nodes..."
